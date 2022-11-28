@@ -1,24 +1,12 @@
-const express = require("express");
-const acc= require("../controllers/acc.controller.js");
 
+const express = require('express');
+const account = require('../controllers/acc.controller');
 
 const router = express.Router();
-// router.route("/login")
-//     .post(acc.login)
-// router.route("/signup")
-//     .post(acc.create)
+//Account
+router.route('/Register').post(account.create);
+router.route('/Login').post(account.checkLogin);
+router.route('/:id').put(account.update).delete(account.delete)
+// router.route('/:id').get(account.findOne).put(account.update).delete(account.delete);
 
-    
-
-
-
-
-router.route('/login')
-    .post(acc.authenticate);
-router.route('/logout')
-    .get(acc.logout);
-
-router.route('/signup')
-    .post(acc.register);
-
-module.exports = router;
+module.exports=router;

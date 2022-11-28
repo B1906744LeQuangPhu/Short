@@ -9,7 +9,7 @@ const bodyParser = require("body-parser"); //use to parse incoming request bodie
 
 const Router = require("./routers/acc.router");
 const ApiError = require("./controllers/api-error");
-app.use("/api/linkshort", Router);
+//app.use("/api/linkshort", Router);
 
 const urlServices = require("./services/urlServices");
 const db = require("./data-access/db");
@@ -30,6 +30,9 @@ app.use(express.json());
 app.listen(port, () => console.log("listening port " + port)); 
 
 
+
+const accountRouter = require("./routers/acc.router");
+app.use("/api/Account", accountRouter);
 
 const config = require("./config/index");
 const MongoDB = require("./data-access/db2");
