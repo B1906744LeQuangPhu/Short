@@ -6,16 +6,15 @@ require('dotenv').config()
 const port = process.env.port;
 const host = process.env.host;
 const bodyParser = require("body-parser"); //use to parse incoming request bodies
-
+const acc = require("./controllers/acc.controller");
 const Router = require("./routers/acc.router");
 const ApiError = require("./controllers/api-error");
-//app.use("/api/linkshort", Router);
+
 
 const urlServices = require("./services/urlServices");
 const db = require("./data-access/db");
 const urlDb = require("./data-access/urlDb");
-const accDb = require("./data-access/accDb");
-const user = require("./models/user.js");
+//const user = require("./models/user.js");
 const { async } = require('validate.js');
 const corsOptions = {
   origin: 'http://localhost:8080',
@@ -37,33 +36,21 @@ app.use("/api/Account", accountRouter);
 const config = require("./config/index");
 const MongoDB = require("./data-access/db2");
 
-// app.post("/login", (req, res) =>{
-  
 
-//   accDb.find(req.body.username)
-//   .then(data=>{
-//     const pass = req.body.pass
-//     if(pass==data.pass ){
-//       res.json({
-//         a: data.pass,
-//         pass : pass
-//       })
-//     }
-//     else {
-//       res.json({
-//         a: 'asd'
-//       })
-//     }
+
+
+app.post("/test", (req, res)=>{
+  
+  urltmp.find({phone: req.body.phone})
+  .then(data=>{
+    res.json(data)
+  })
+  .catch(err=>{
+    console.log(err)
     
-//   }).catch(error=>{
-//     res.json({
-//       a : "di user"
-//     })
-//   })
-  
-// }
+  })
+})
 
-// );
 app.post("/url", async (req, res) => {
   try {
       if (!!urlServices.validateUrl(req.body.url))
@@ -75,7 +62,8 @@ app.post("/url", async (req, res) => {
       const urlKey = urlServices.generateUrlKey();
       const shortUrl = `http://${host}:${port}/${urlKey}`
       
-      await urlDb.save(req.body.url, shortUrl, urlKey)
+      await urlDb.save(req.body.url,shortUrl,urlKey)
+      console.log(acc.checkLogin);
       return res.status(200).send({ shortUrl });
 
   } catch (error) {
@@ -95,11 +83,7 @@ app.get("/:shortUrlId", async (req, res) => {
 
 
 
-app.get("/", (req, res) => {
-  res.json({
-      message: "Welcome to todo book application."
-  });
-});
+
 
 app.use((req, res, next) => {
   // Code ở đây sẽ chạy khi không có route được định nghĩa nào

@@ -40,6 +40,11 @@ const routes = [
         name: "deleteAcc",
         component: () => import("@/views/DeleteAccount.vue"),
     },
+    {
+        path: "/Shortener/MyLink",
+        name: "MyLink",
+        component: ()=> import("@/components/MyLink.vue")
+    }
 ];
 
 

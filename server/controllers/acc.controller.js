@@ -1,7 +1,7 @@
 'use strict';
 
 // exports
-const user = require("../models/user.js");
+//const user = require("../models/user.js");
 //const UserService = require("../services/user.service");
 const MongoDB = require("../data-access/db2");
 const ApiError = require("./api-error");
