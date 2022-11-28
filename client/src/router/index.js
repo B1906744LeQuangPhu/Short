@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/views/Myhome.vue";
-import Login from "@/components/Form.vue";
+
 
 
 const routes = [
@@ -9,11 +9,15 @@ const routes = [
         name: "Home",
         component: Home,
     },
-    
     {
-        path: "/login",
+        path: "/Shortener/Login",
         name: "Login",
-        component: Login,
+        component: () => import("@/views/ShortenerLogin.vue"),
+    },
+    {
+        path: "/Shortener/Register",
+        name: "Register",
+        component: () => import("@/views/ShortenerRegister.vue"),
     },
     
     {
@@ -21,9 +25,28 @@ const routes = [
         name: "notfound",
         component: () => import("@/views/NotFound.vue"),
     },
+    {
+        path: "/UserName",
+        name: "changeName",
+        component: () => import("@/views/UserName.vue"),
+    },
+    {
+        path: "/UserPass",
+        name: "changePass",
+        component: () => import("@/views/UserPassword.vue"),
+    },
+    {
+        path: "/deleteAccount",
+        name: "deleteAcc",
+        component: () => import("@/views/DeleteAccount.vue"),
+    },
 ];
+
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
+
+
 export default router;

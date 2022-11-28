@@ -9,5 +9,5 @@ import "./assets/test.js";
 
 import router from "./router";
 
-
-createApp(App).use(router).mount("#app");
+import store from './store/store'
+createApp(App).use(router).use(store).mount("#app");
