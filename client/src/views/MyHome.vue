@@ -11,6 +11,7 @@
           <div class="card-body">
             <form @submit.prevent="submit(url)">
               <div class="form-group">
+                
                 <label for="url">Enter Url</label>
                 <textarea type="url" class="form-control" v-model="url" style="height:150px" />
               </div>
@@ -35,25 +36,35 @@
 
   import axios from "axios";
   export default {
+    computed: {
+        
+        getPhone() {
+          return this.$store.getters.getPhone
+        },
+    },
     data: () => {
       return {
         url: "",
         shortUrl: "",
+        phone:"",
       };
     },
     methods: {
       submit: async function (url) {
         try {
+          const phone= this.$store.getters.getPhone
           const api = "http://localhost:5000/url";
           const response = await axios.post(api, {
-            url,
+            url, phone,
           });
           this.shortUrl = response.data.shortUrl;
+          this.phone=response.data.phone;
         } catch (error) {
           console.log(error);
         }
       },
     },
+    
   };
   
   </script> 

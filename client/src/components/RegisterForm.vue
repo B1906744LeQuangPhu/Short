@@ -1,5 +1,5 @@
 <template>
-    <Form @submit="submitContact" :validation-schema="contactFormSchema">
+    <Form @submit="submitContact" v-if="!isHidden" :validation-schema="contactFormSchema">
         <div class="form-group">
             <label for="name">Tên</label>
             <Field name="name" type="text" class="form-control" v-model="contactLocal.name" />
@@ -31,6 +31,7 @@ export default {
         Form, Field,
         ErrorMessage,
     },
+    
     emits: ["submit:contact"],
     props: {
         contact: { type: Object, required: true }

@@ -5,16 +5,10 @@
             <RegisterForm :contact="contact" @submit:contact="createUser" />
             <p>{{ message }}</p>
         </div>
-        <div v-else>
-            <h2>Đăng ký thành công</h2>
-            <router-link :to="{ name: 'Login' }" > 
-                Đăng nhập để có thể sử dụng ứng dụng
-            </router-link>
-        </div>
     </div>
 </template>
     
-<script>
+<script >
 
 import AccountService from "../sevices/account.service";
 import RegisterForm from "../components/RegisterForm.vue";
@@ -28,6 +22,7 @@ export default {
         return {
             contact: {},
             Register: true,
+            isHidden: false,
         };
     },
 
@@ -40,8 +35,11 @@ export default {
                     alert("Đăng ký thất bại. Có thể số điện thoại đã được đăng ký!!")
                 }
                 else {
+                    alert("Đăng ký thành công sẽ chuyển sang trang đăng nhập")
+                    window.location.href = "/Shortener/Login";
+                    this.isHidden= true,
                     this.Register = false
-
+                    
                 }
 
 
@@ -52,5 +50,7 @@ export default {
         },
     },
 };
+
 </script>
+
     

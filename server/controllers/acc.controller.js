@@ -75,7 +75,9 @@ exports.delete= async (req, res, next) => {
         );
     }
 };
-
+exports.getnamelog= (res,req)=>{
+    console.log(this.checkLogin.name)
+}
 // exports.findAll = async (req, res, next) =>{
 //     let documents = []
 

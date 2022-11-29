@@ -59,11 +59,12 @@ app.post("/url", async (req, res) => {
           mess: req.body.url,
         });
       
+      const phone = req.body.phone;
       const urlKey = urlServices.generateUrlKey();
       const shortUrl = `http://${host}:${port}/${urlKey}`
       
-      await urlDb.save(req.body.url,shortUrl,urlKey)
-      console.log(acc.checkLogin);
+      await urlDb.save(req.body.url,shortUrl,urlKey,phone)
+      
       return res.status(200).send({ shortUrl });
 
   } catch (error) {
